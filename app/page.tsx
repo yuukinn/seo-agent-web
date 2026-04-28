@@ -1,65 +1,140 @@
-import Image from "next/image";
+"use client";
+import {
+  Command,
+  Search,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Card } from "@/components/ui/card";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { COMMANDS } from "@/lib/commands";
 
 export default function Home() {
+  const [url, setUrl] = useState("");     // 入力されたURL
+  const [error, setError] = useState(""); // エラーメッセージ
+  const [isLoading, setIsLoading] = useState(false);
+  const [selectedCommand, setSelectedCommand] = useState("page");
+
+  const router = useRouter();
+
+  const isValidUrl = (input: string) : boolean => {
+    try {
+      // URLの分析
+      const parsed = new URL(input.startsWith("http") ? input : `https://${input}`);
+      // 有効なURLかどうか判定
+      return parsed.protocol === "http:" || parsed.protocol === "https:";
+    } catch {
+      return false;
+    }
+  };
+
+  // 分析開始ボタンが押された時の処理
+  const handleSubmit = async () => {
+    // バリデーション
+    if(!url.trim()) {
+      setError("URLを入力してください");
+      return;
+    }
+    if(!isValidUrl(url)) {
+      setError("正しいURLを入力してください")
+      return;
+    }
+
+    setError("");
+    setIsLoading(true);
+
+    try {
+      // TODO: バックエンド実装後に実際のAPI呼び出しに置き換える
+      const fullUrl = url.startsWith("http") ? url : `https://${url}`;
+      const res = await fetch("http://localhost:8000/api/seo", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({command: selectedCommand, url:fullUrl})
+      });
+
+      if(!res.ok) {
+        const error = await res.json();
+        throw new Error(error.message || "Unknown error");
+      }
+
+      const data = await res.json();
+      localStorage.setItem(`seo-result-${data.id}`, JSON.stringify(data));
+
+      router.push(`/result/${data.id}`);
+    } catch {
+      setError("分析の開始に失敗しました。もう一度お試しください。");
+      setIsLoading(false);
+    }
+  }
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <div className="flex flex-1 flex-col items-center justify-center px-4 py-16">
+      {/* ヘッダー */}
+      <div className="w-full max-w-2xl space-y-8">
+        <div className="text-center space-y-2">
+          <h1 className="text-6xl font-bold tracking-tight flex items-center justify-center gap-2">
+            SEO 分析
+            <Search className="w-12 h-12" />
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+          <p className="text-muted-foreground mt-4">URLを入力して、分析の種類を選んでください</p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+
+        <div className="space-y-8">
+        <Input
+              type="url"
+              placeholder="https://example.com"
+              value={url}
+              onChange={(e) => {
+                setUrl(e.target.value);
+                setError(""); // 入力が変わったらエラーをクリア
+              }}
+              onKeyDown={(e) => {
+                // Enterキーで分析開始
+                if (e.key === "Enter") handleSubmit();
+              }}
+              className="h-12 text-base"
+              aria-label="分析するサイトのURL"
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            {error && (
+              <p className="text-sm text-destructive">{error}</p>
+            )}
         </div>
-      </main>
+
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-5">
+            {COMMANDS.map((cmd) => (
+              <Card
+                key={cmd.id}
+                role="button"
+                tabIndex={0}
+                aria-pressed={selectedCommand === cmd.id}
+                onClick={() => setSelectedCommand(cmd.id)}
+                className={`cursor-pointer p-3 text-center transition-all hover:border-primary ${selectedCommand === cmd.id ? "border-primary bg-primary/5 ring-1" : ""}`}
+              >
+                <div className="text-2xl flex items-center justify-center">{<cmd.icon className="w-5 h-5"/>}</div>
+                <div className="mt-1 text-xs text-center font-medium">{cmd.name}</div>
+              </Card>
+            ))};
+        </div>
+        <p className="text-center text-sm text-muted-foreground">
+          {COMMANDS.find((c) => c.id === selectedCommand)?.description}
+        </p>
+        <Button
+          onClick={handleSubmit}
+          disabled={isLoading}
+          className="w-full h-12 text-base"
+          size="lg"
+        >
+          {isLoading ? "分析中..." : (
+            <>
+              <Search className="w-4 h-4" />
+              分析を開始する
+            </>
+          )}
+        </Button>
+      </div>
     </div>
   );
 }
