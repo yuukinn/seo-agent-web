@@ -47,7 +47,7 @@ export default function Home() {
     try {
       // TODO: バックエンド実装後に実際のAPI呼び出しに置き換える
       const fullUrl = url.startsWith("http") ? url : `https://${url}`;
-      const res = await fetch("http://localhost:8000/api/seo", {
+      const res = await fetch("/api/seo", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
