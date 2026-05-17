@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["file:///Users/yuuki/Desktop/AI/seo/seo-web/frontend/app/page.tsx"],"sourcesContent":["\"use client\";\nimport {\n  FileSearch,\n} from \"lucide-react\";\n\nexport default function Home() {\n  return (\n    <div>\n      {/* ヘッダー */}\n      <div className=\"text-center space-y-2\">\n        <h1 className=\"text-6xl font-bold tracking-tight\">\n          <Search className=\"w-8 h-8\" />\n          FileSearch SEO 分析\n          </h1>\n        <p>URLを入力して、分析の種類を選んでください</p>\n      </div>\n    </div>\n\n\n  );\n}\n"],"names":["Home","className","Search"],"mappings":";;;;;AAAA;;AAKe,SAASA;IACtB,qBACE,gSAAC;kBAEC,cAAA,gSAAC;YAAIC,WAAU;;8BACb,gSAAC;oBAAGA,WAAU;;sCACZ,gSAACC;4BAAOD,WAAU;;;;;;wBAAY;;;;;;;8BAGhC,gSAAC;8BAAE;;;;;;;;;;;;;;;;;AAMX"}},
+    {"offset": {"line": 56, "column": 0}, "map": {"version":3,"sources":["file:///Users/yuuki/Desktop/AI/seo/seo-web/frontend/node_modules/next/src/server/route-modules/app-page/vendored/ssr/react-jsx-dev-runtime.ts"],"sourcesContent":["module.exports = (\n  require('../../module.compiled') as typeof import('../../module.compiled')\n).vendored['react-ssr']!.ReactJsxDevRuntime\n"],"names":["module","exports","require","vendored","ReactJsxDevRuntime"],"mappings":"AAAAA,OAAOC,OAAO,GACZC,QAAQ,4JACRC,QAAQ,CAAC,YAAY,CAAEC,kBAAkB","ignoreList":[0]}}]
+}

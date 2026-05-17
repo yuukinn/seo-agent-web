@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 13, "column": 0}, "map": {"version":3,"sources":["file:///Users/yuuki/Desktop/AI/seo/seo-web/frontend/app/favicon.ico.mjs%20%28structured%20image%20object%29"],"sourcesContent":["import src from \"IMAGE\";\nexport default { src, width: 256, height: 256 }\n"],"names":["src","width","height"],"mappings":";;;;AAAA;;uCACe;IAAEA,KAAAA,qLAAG;IAAEC,OAAO;IAAKC,QAAQ;AAAI"}},
+    {"offset": {"line": 28, "column": 0}, "map": {"version":3,"sources":["file:///Users/yuuki/Desktop/AI/seo/seo-web/frontend/app/page.tsx"],"sourcesContent":["import Image from \"next/image\";\n\nexport default function Home() {\n  return (\n    <div>\n      <h1>test</h1>\n    </div>\n  );\n}\n"],"names":["Home"],"mappings":";;;;;;AAEe,SAASA;IACtB,qBACE,gSAAC;kBACC,cAAA,gSAAC;sBAAG;;;;;;;;;;;AAGV"}}]
+}

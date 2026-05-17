@@ -1,0 +1,10 @@
+var R=require("../../../chunks/[turbopack]_runtime.js")("server/app/api/seo/route.js")
+R.c("server/chunks/[root-of-the-server]__0y~frgu._.js")
+R.c("server/chunks/0usa_next_033.1n7._.js")
+R.c("server/chunks/0usa_@smithy_core_dist-es_01uicqd._.js")
+R.c("server/chunks/0usa_@aws-sdk_client-bedrock-agentcore_06hq814._.js")
+R.c("server/chunks/0usa_0fn9pe1._.js")
+R.c("server/chunks/[root-of-the-server]__11iw5c2._.js")
+R.c("server/chunks/0amv_AI_seo_seo-web_frontend__next-internal_server_app_api_seo_route_actions_132b7o9.js")
+R.m("[project]/Desktop/AI/seo/seo-web/frontend/node_modules/next/dist/esm/build/templates/app-route.js { INNER_APP_ROUTE => \"[project]/Desktop/AI/seo/seo-web/frontend/app/api/seo/route.ts [app-route] (ecmascript)\" } [app-route] (ecmascript)")
+module.exports=R.m("[project]/Desktop/AI/seo/seo-web/frontend/node_modules/next/dist/esm/build/templates/app-route.js { INNER_APP_ROUTE => \"[project]/Desktop/AI/seo/seo-web/frontend/app/api/seo/route.ts [app-route] (ecmascript)\" } [app-route] (ecmascript)").exports

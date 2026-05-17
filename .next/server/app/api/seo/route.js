@@ -1,0 +1,10 @@
+var R=require("../../../chunks/[turbopack]_runtime.js")("server/app/api/seo/route.js")
+R.c("server/chunks/[root-of-the-server]__0_2_c6a._.js")
+R.c("server/chunks/0usa_@aws-sdk_core_dist-es_submodules_protocols_json_AwsRestJsonProtocol_0z_p3h5.js")
+R.c("server/chunks/[root-of-the-server]__00d__pn._.js")
+R.c("server/chunks/0usa_0yrrmd_._.js")
+R.c("server/chunks/0usa_07viqab._.js")
+R.c("server/chunks/[root-of-the-server]__02xzrg.._.js")
+R.c("server/chunks/0amv_AI_seo_seo-web_frontend__next-internal_server_app_api_seo_route_actions_132b7o9.js")
+R.m(92532)
+module.exports=R.m(92532).exports

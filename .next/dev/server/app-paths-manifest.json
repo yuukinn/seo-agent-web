@@ -1,0 +1,5 @@
+{
+  "/api/seo/route": "app/api/seo/route.js",
+  "/page": "app/page.js",
+  "/result/[id]/page": "app/result/[id]/page.js"
+}
